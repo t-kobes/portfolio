@@ -26,6 +26,13 @@ export interface Content {
   projects: { title: string; subtitle: string; items: Project[] };
   skills: { title: string; groups: { label: string; items: string[] }[] };
   about: { title: string; paragraphs: string[] };
+  education: {
+    title: string;
+    school: string;
+    degree: string;
+    period: string;
+    note: string;
+  };
   contact: {
     title: string;
     subtitle: string;
@@ -33,12 +40,18 @@ export interface Content {
     emailLabel: string;
     github: string;
     githubLabel: string;
+    telegram: string;
+    telegramLabel: string;
+    phone: string;
+    phoneLabel: string;
   };
   footer: string;
 }
 
 const email = "tverkgvorov@gmail.com";
 const github = "https://github.com/Beginner-Tima";
+const telegram = "https://t.me/singersh";
+const phone = "+7 705 965 6076";
 
 export const content: Record<Locale, Content> = {
   ru: {
@@ -65,7 +78,7 @@ export const content: Record<Locale, Content> = {
     facts: [
       "Табыс — собственный B2B-продукт, запущен и работает",
       "CTO платформы KazTeenCommunity",
-      "Хакатон AITK — 20 место из 72, соло",
+      "3 хакатона, лучший результат — AITK: 20 из 72, соло",
       "Волонтёр UNICEF Kazakhstan",
     ],
     projects: {
@@ -161,6 +174,13 @@ export const content: Record<Locale, Content> = {
         "Мне важно, как система устроена под капотом: защита бизнес-логики от гонок, безопасность на уровне базы данных, архитектура без лишних затрат. Помимо кода — опыт роли CTO в командном проекте и волонтёрство в UNICEF Kazakhstan. Открыт к стажировкам и интересным задачам.",
       ],
     },
+    education: {
+      title: "Образование",
+      school: "Digital College Almaty",
+      degree: "Software Engineering",
+      period: "2025 — 2029",
+      note: "2-й курс · повышенная стипендия",
+    },
     contact: {
       title: "Контакты",
       subtitle: "Открыт к предложениям о стажировке и работе.",
@@ -168,6 +188,10 @@ export const content: Record<Locale, Content> = {
       emailLabel: "Почта",
       github,
       githubLabel: "GitHub",
+      telegram,
+      telegramLabel: "Telegram · @singersh",
+      phone,
+      phoneLabel: "Телефон",
     },
     footer: "Тамерлан Кобес",
   },
@@ -195,7 +219,7 @@ export const content: Record<Locale, Content> = {
     facts: [
       "Tabys — my own B2B product, launched and running",
       "CTO of the KazTeenCommunity platform",
-      "AITK Hackathon — 20th of 72, solo",
+      "3 hackathons, best result — AITK: 20th of 72, solo",
       "UNICEF Kazakhstan volunteer",
     ],
     projects: {
@@ -291,6 +315,13 @@ export const content: Record<Locale, Content> = {
         "I care about how a system works under the hood: protecting business logic from race conditions, database-level security, architecture without unnecessary overhead. Beyond code — experience as CTO on a team project and volunteering with UNICEF Kazakhstan. Open to internships and interesting challenges.",
       ],
     },
+    education: {
+      title: "Education",
+      school: "Digital College Almaty",
+      degree: "Software Engineering",
+      period: "2025 — 2029",
+      note: "2nd year · merit scholarship",
+    },
     contact: {
       title: "Contact",
       subtitle: "Open to internship and job opportunities.",
@@ -298,6 +329,10 @@ export const content: Record<Locale, Content> = {
       emailLabel: "Email",
       github,
       githubLabel: "GitHub",
+      telegram,
+      telegramLabel: "Telegram · @singersh",
+      phone,
+      phoneLabel: "Phone",
     },
     footer: "Tamerlan Kobes",
   },

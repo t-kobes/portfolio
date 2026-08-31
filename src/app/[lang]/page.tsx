@@ -126,6 +126,19 @@ export default async function Home({
             <p key={p.slice(0, 24)}>{p}</p>
           ))}
         </div>
+        <div className="mt-10 flex max-w-3xl flex-col gap-1 rounded-2xl bg-card p-6 shadow-sm ring-1 ring-border/60 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h3 className="text-sm font-semibold uppercase tracking-wide text-muted">
+              {c.education.title}
+            </h3>
+            <p className="mt-1 font-semibold">{c.education.school}</p>
+            <p className="text-muted">{c.education.degree}</p>
+          </div>
+          <div className="text-sm text-muted sm:text-right">
+            <p>{c.education.period}</p>
+            <p>{c.education.note}</p>
+          </div>
+        </div>
       </section>
 
       <section id="contact" className="scroll-mt-20 py-16 pb-24">
@@ -142,12 +155,26 @@ export default async function Home({
               {c.contact.emailLabel} · {c.contact.email}
             </a>
             <a
+              href={c.contact.telegram}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-foreground"
+            >
+              {c.contact.telegramLabel}
+            </a>
+            <a
               href={c.contact.github}
               target="_blank"
               rel="noreferrer"
               className="rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-foreground"
             >
               {c.contact.githubLabel}
+            </a>
+            <a
+              href={`tel:${c.contact.phone.replace(/\s/g, "")}`}
+              className="rounded-full border border-border px-6 py-3 text-sm font-medium transition-colors hover:border-foreground"
+            >
+              {c.contact.phoneLabel} · {c.contact.phone}
             </a>
           </div>
         </div>
