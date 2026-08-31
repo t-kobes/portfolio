@@ -8,6 +8,7 @@ export interface Project {
   highlights: string[];
   stack: string[];
   link?: string;
+  linkLabel?: string;
 }
 
 export interface Content {
@@ -21,6 +22,7 @@ export interface Content {
     cta: string;
     ctaSecondary: string;
   };
+  facts: string[];
   projects: { title: string; subtitle: string; items: Project[] };
   skills: { title: string; groups: { label: string; items: string[] }[] };
   about: { title: string; paragraphs: string[] };
@@ -36,14 +38,14 @@ export interface Content {
 }
 
 const email = "tverkgvorov@gmail.com";
-const github = "https://github.com/kobestamerlan"; // TODO: подставить реальный ник на GitHub
+const github = "https://github.com/Beginner-Tima";
 
 export const content: Record<Locale, Content> = {
   ru: {
     meta: {
       title: "Тамерлан Кобес — разработчик",
       description:
-        "Портфолио Тамерлана Кобеса: full-stack разработчик и студент. CareerVerse, Kaspi Seller Mini-App и другие проекты.",
+        "Full-stack разработчик из Казахстана. Строю продукты для селлеров маркетплейсов и образовательные платформы: Табыс, CareerVerse, KazTeenCommunity.",
     },
     nav: {
       projects: "Проекты",
@@ -54,39 +56,76 @@ export const content: Record<Locale, Content> = {
     hero: {
       greeting: "Привет, я",
       name: "Тамерлан Кобес",
-      role: "Full-stack разработчик · студент",
+      role: "Full-stack разработчик",
       tagline:
-        "Делаю продукты от базы данных до интерфейса: продуманная архитектура, чистый код и внимание к деталям.",
+        "Строю продукты полного цикла — от архитектуры и базы данных до запуска и первых пользователей. Специализация: serverless-бэкенды, Telegram Mini Apps и AI-интеграции.",
       cta: "Смотреть проекты",
       ctaSecondary: "Написать мне",
     },
+    facts: [
+      "Табыс — собственный B2B-продукт, запущен и работает",
+      "CTO платформы KazTeenCommunity",
+      "Хакатон AITK — 20 место из 72, соло",
+      "Волонтёр UNICEF Kazakhstan",
+    ],
     projects: {
       title: "Проекты",
-      subtitle: "То, что я построил своими руками — от схемы данных до деплоя.",
+      subtitle:
+        "Не учебные задачи — работающие системы с пользователями, данными и деплоем в продакшен.",
       items: [
+        {
+          name: "Табыс",
+          tagline: "B2B-платформа для продавцов Kaspi и Wildberries",
+          description:
+            "Telegram Mini App и бот, которые помогают селлерам находить прибыльные ниши, отслеживать цены конкурентов, считать маржу и генерировать SEO-карточки на русском и казахском. Запущен: радары ниш и цен, юнит-экономика, кабинет продавца.",
+          highlights: [
+            "Serverless-архитектура на Supabase Edge Functions — без постоянного сервера",
+            "Авторизация: HMAC-проверка Telegram initData → JWT → Row Level Security",
+            "Ежедневные сборщики рыночных данных по расписанию и алерты о ценах в Telegram",
+            "Двуязычная генерация SEO-контента через Gemini",
+          ],
+          stack: [
+            "TypeScript",
+            "Supabase",
+            "PostgreSQL",
+            "Edge Functions",
+            "Telegram Mini Apps",
+            "React 19",
+            "Gemini API",
+          ],
+        },
         {
           name: "CareerVerse",
           tagline: "Геймифицированная платформа развития карьеры",
           description:
-            "Платформа, где пользователь прокачивает профессию как персонажа в игре: уровни, XP, монеты и адаптивные тесты. Полный цикл — от схемы базы данных до продакшена на Vercel.",
+            "Пользователь прокачивает профессию как персонажа в игре: уровни, XP, монеты, адаптивные тесты. Полный цикл — от схемы данных до продакшена на Vercel.",
           highlights: [
-            "Защита начисления наград от race conditions через интерактивные транзакции Prisma",
+            "Начисление наград защищено от race conditions интерактивными транзакциями Prisma",
             "Дашборд без N+1 — единый агрегирующий запрос",
             "Авторизация через Supabase JWT, стриминг результатов по SSE",
           ],
           stack: ["NestJS", "Prisma", "PostgreSQL", "Supabase", "Next.js", "Vercel"],
+          link: "https://github.com/Beginner-Tima/CareerVerse",
+          linkLabel: "Код на GitHub",
         },
         {
-          name: "Kaspi Seller Mini-App",
-          tagline: "Telegram Mini App для продавцов Kaspi",
+          name: "KazTeenCommunity",
+          tagline: "Платформа профориентации для подростков Казахстана · CTO",
           description:
-            "Мини-приложение внутри Telegram, помогающее продавцам маркетплейса Kaspi считать маржу и вести учёт товаров — быстрый интерфейс прямо в мессенджере.",
+            "Подбор университетов и хобби, дневник поступления, база вузов и грантов, ИИ-анализ профиля. Отвечаю за техническую часть платформы как CTO.",
           highlights: [
-            "Интеграция с Telegram WebApp SDK",
-            "Расчёт маржи с покрытием юнит-тестами",
-            "React 19 + Vite: мгновенная загрузка на мобильных",
+            "ИИ-инструменты: профориентация, подбор вуза и хобби",
+            "Supabase Auth и Edge Functions, обращения в поддержку через email и Telegram",
+            "Интерфейс на shadcn/ui с TanStack Query и Framer Motion",
           ],
-          stack: ["React 19", "TypeScript", "Vite", "Telegram WebApp SDK"],
+          stack: [
+            "React 18",
+            "TypeScript",
+            "Vite",
+            "Tailwind CSS",
+            "shadcn/ui",
+            "Supabase",
+          ],
         },
       ],
     },
@@ -96,20 +135,30 @@ export const content: Record<Locale, Content> = {
         { label: "Языки", items: ["TypeScript", "JavaScript", "SQL"] },
         {
           label: "Frontend",
-          items: ["React", "Next.js", "Tailwind CSS", "Vite"],
+          items: ["React", "Next.js", "Vite", "Tailwind CSS", "shadcn/ui"],
         },
         {
           label: "Backend",
-          items: ["NestJS", "Node.js", "Prisma", "PostgreSQL", "Supabase"],
+          items: [
+            "Supabase",
+            "PostgreSQL",
+            "NestJS",
+            "Prisma",
+            "Edge Functions",
+            "Node.js",
+          ],
         },
-        { label: "Инструменты", items: ["Git", "Vercel", "ESLint", "Claude Code"] },
+        {
+          label: "Инструменты",
+          items: ["Telegram Bot API", "Gemini API", "n8n", "Docker", "Git", "Vercel"],
+        },
       ],
     },
     about: {
       title: "Обо мне",
       paragraphs: [
-        "Я студент и разработчик. Учусь и параллельно строю настоящие продукты: не учебные задачки, а системы с базой данных, авторизацией, транзакциями и деплоем в продакшен.",
-        "Мне интересна архитектура: как защитить бизнес-логику от гонок, как убрать лишние запросы к базе, как сделать интерфейс, которым приятно пользоваться. Ищу стажировку или позицию, где смогу расти рядом с сильной командой.",
+        "Студент Digital College и разработчик из Казахстана. Параллельно с учёбой строю и запускаю настоящие продукты: с базами данных, авторизацией, платёжной логикой и живыми пользователями — а не учебные примеры.",
+        "Мне важно, как система устроена под капотом: защита бизнес-логики от гонок, безопасность на уровне базы данных, архитектура без лишних затрат. Помимо кода — опыт роли CTO в командном проекте и волонтёрство в UNICEF Kazakhstan. Открыт к стажировкам и интересным задачам.",
       ],
     },
     contact: {
@@ -126,7 +175,7 @@ export const content: Record<Locale, Content> = {
     meta: {
       title: "Tamerlan Kobes — Developer",
       description:
-        "Portfolio of Tamerlan Kobes: full-stack developer and student. CareerVerse, Kaspi Seller Mini-App and other projects.",
+        "Full-stack developer from Kazakhstan. Building products for marketplace sellers and education platforms: Tabys, CareerVerse, KazTeenCommunity.",
     },
     nav: {
       projects: "Projects",
@@ -137,39 +186,76 @@ export const content: Record<Locale, Content> = {
     hero: {
       greeting: "Hi, I'm",
       name: "Tamerlan Kobes",
-      role: "Full-stack developer · student",
+      role: "Full-stack developer",
       tagline:
-        "I build products end to end — from the database to the interface — with solid architecture, clean code and attention to detail.",
+        "I build products end to end — from architecture and database to launch and first users. Focus areas: serverless backends, Telegram Mini Apps and AI integrations.",
       cta: "View projects",
       ctaSecondary: "Get in touch",
     },
+    facts: [
+      "Tabys — my own B2B product, launched and running",
+      "CTO of the KazTeenCommunity platform",
+      "AITK Hackathon — 20th of 72, solo",
+      "UNICEF Kazakhstan volunteer",
+    ],
     projects: {
       title: "Projects",
-      subtitle: "Things I built myself — from data schema to deployment.",
+      subtitle:
+        "Not coursework — working systems with users, data and production deployments.",
       items: [
+        {
+          name: "Tabys",
+          tagline: "B2B platform for Kaspi and Wildberries sellers",
+          description:
+            "A Telegram Mini App and bot that help marketplace sellers find profitable niches, track competitor prices, calculate margins and generate SEO listings in Russian and Kazakh. Live: niche and price radars, unit economics, seller dashboard.",
+          highlights: [
+            "Serverless architecture on Supabase Edge Functions — no always-on server",
+            "Auth: HMAC verification of Telegram initData → JWT → Row Level Security",
+            "Scheduled daily market-data collectors and price alerts in Telegram",
+            "Bilingual SEO content generation with Gemini",
+          ],
+          stack: [
+            "TypeScript",
+            "Supabase",
+            "PostgreSQL",
+            "Edge Functions",
+            "Telegram Mini Apps",
+            "React 19",
+            "Gemini API",
+          ],
+        },
         {
           name: "CareerVerse",
           tagline: "Gamified career development platform",
           description:
-            "A platform where users level up a profession like a game character: levels, XP, coins and adaptive tests. Full cycle — from database schema to production on Vercel.",
+            "Users level up a profession like a game character: levels, XP, coins, adaptive tests. Full cycle — from data schema to production on Vercel.",
           highlights: [
             "Reward accrual protected from race conditions with Prisma interactive transactions",
             "N+1-free dashboard via a single aggregated query",
             "Supabase JWT auth, result streaming over SSE",
           ],
           stack: ["NestJS", "Prisma", "PostgreSQL", "Supabase", "Next.js", "Vercel"],
+          link: "https://github.com/Beginner-Tima/CareerVerse",
+          linkLabel: "Code on GitHub",
         },
         {
-          name: "Kaspi Seller Mini-App",
-          tagline: "Telegram Mini App for Kaspi marketplace sellers",
+          name: "KazTeenCommunity",
+          tagline: "Career guidance platform for teenagers in Kazakhstan · CTO",
           description:
-            "A mini app inside Telegram that helps Kaspi marketplace sellers calculate margins and track inventory — a fast interface right in the messenger.",
+            "University and hobby matching, an admission diary, a database of universities and grants, AI profile analysis. I own the technical side of the platform as CTO.",
           highlights: [
-            "Telegram WebApp SDK integration",
-            "Margin calculation covered by unit tests",
-            "React 19 + Vite: instant load on mobile",
+            "AI tools: career guidance, university and hobby matching",
+            "Supabase Auth and Edge Functions, support requests via email and Telegram",
+            "UI built with shadcn/ui, TanStack Query and Framer Motion",
           ],
-          stack: ["React 19", "TypeScript", "Vite", "Telegram WebApp SDK"],
+          stack: [
+            "React 18",
+            "TypeScript",
+            "Vite",
+            "Tailwind CSS",
+            "shadcn/ui",
+            "Supabase",
+          ],
         },
       ],
     },
@@ -179,20 +265,30 @@ export const content: Record<Locale, Content> = {
         { label: "Languages", items: ["TypeScript", "JavaScript", "SQL"] },
         {
           label: "Frontend",
-          items: ["React", "Next.js", "Tailwind CSS", "Vite"],
+          items: ["React", "Next.js", "Vite", "Tailwind CSS", "shadcn/ui"],
         },
         {
           label: "Backend",
-          items: ["NestJS", "Node.js", "Prisma", "PostgreSQL", "Supabase"],
+          items: [
+            "Supabase",
+            "PostgreSQL",
+            "NestJS",
+            "Prisma",
+            "Edge Functions",
+            "Node.js",
+          ],
         },
-        { label: "Tools", items: ["Git", "Vercel", "ESLint", "Claude Code"] },
+        {
+          label: "Tools",
+          items: ["Telegram Bot API", "Gemini API", "n8n", "Docker", "Git", "Vercel"],
+        },
       ],
     },
     about: {
       title: "About",
       paragraphs: [
-        "I'm a student and a developer. While studying, I build real products — not toy exercises, but systems with databases, auth, transactions and production deployments.",
-        "I care about architecture: protecting business logic from race conditions, eliminating redundant database queries, crafting interfaces people enjoy using. Looking for an internship or a role where I can grow alongside a strong team.",
+        "A Digital College student and developer from Kazakhstan. Alongside my studies I build and ship real products — with databases, auth, payment logic and live users, not textbook exercises.",
+        "I care about how a system works under the hood: protecting business logic from race conditions, database-level security, architecture without unnecessary overhead. Beyond code — experience as CTO on a team project and volunteering with UNICEF Kazakhstan. Open to internships and interesting challenges.",
       ],
     },
     contact: {

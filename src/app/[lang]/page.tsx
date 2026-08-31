@@ -67,14 +67,27 @@ export default async function Home({
         </div>
       </section>
 
+      <section aria-label="facts" className="pb-8">
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {c.facts.map((f) => (
+            <li
+              key={f}
+              className="rounded-2xl bg-card px-5 py-4 text-sm leading-snug shadow-sm ring-1 ring-border/60"
+            >
+              {f}
+            </li>
+          ))}
+        </ul>
+      </section>
+
       <section id="projects" className="scroll-mt-20 py-16">
         <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
           {c.projects.title}
         </h2>
         <p className="mt-3 max-w-2xl text-lg text-muted">{c.projects.subtitle}</p>
         <div className="mt-10 grid gap-6 md:grid-cols-2">
-          {c.projects.items.map((p) => (
-            <ProjectCard key={p.name} project={p} />
+          {c.projects.items.map((p, i) => (
+            <ProjectCard key={p.name} project={p} featured={i === 0} />
           ))}
         </div>
       </section>
@@ -147,9 +160,19 @@ export default async function Home({
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({
+  project,
+  featured = false,
+}: {
+  project: Project;
+  featured?: boolean;
+}) {
   return (
-    <article className="flex flex-col rounded-3xl bg-card p-8 shadow-sm ring-1 ring-border/60 transition-shadow hover:shadow-md">
+    <article
+      className={`flex flex-col rounded-3xl bg-card p-8 shadow-sm ring-1 ring-border/60 transition-shadow hover:shadow-md ${
+        featured ? "md:col-span-2" : ""
+      }`}
+    >
       <h3 className="text-2xl font-semibold tracking-tight">{project.name}</h3>
       <p className="mt-1 font-medium text-accent">{project.tagline}</p>
       <p className="mt-4 leading-relaxed text-muted">{project.description}</p>
@@ -173,6 +196,16 @@ function ProjectCard({ project }: { project: Project }) {
           </span>
         ))}
       </div>
+      {project.link && (
+        <a
+          href={project.link}
+          target="_blank"
+          rel="noreferrer"
+          className="mt-6 text-sm font-medium text-accent hover:underline"
+        >
+          {project.linkLabel} →
+        </a>
+      )}
     </article>
   );
 }
