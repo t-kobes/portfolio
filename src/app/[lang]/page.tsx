@@ -22,6 +22,12 @@ export default async function Home({
           <a href="#projects" className="transition-colors hover:text-foreground">
             {c.nav.projects}
           </a>
+          <a
+            href="#experience"
+            className="hidden transition-colors hover:text-foreground sm:block"
+          >
+            {c.nav.experience}
+          </a>
           <a href="#skills" className="hidden transition-colors hover:text-foreground sm:block">
             {c.nav.skills}
           </a>
@@ -88,6 +94,43 @@ export default async function Home({
         <div className="mt-10 grid gap-6 md:grid-cols-2">
           {c.projects.items.map((p, i) => (
             <ProjectCard key={p.name} project={p} featured={i === 0} />
+          ))}
+        </div>
+      </section>
+
+      <section id="experience" className="scroll-mt-20 py-16">
+        <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
+          {c.experience.title}
+        </h2>
+        <div className="mt-10 space-y-6">
+          {c.experience.items.map((job) => (
+            <article
+              key={job.role}
+              className="rounded-3xl bg-card p-8 shadow-sm ring-1 ring-border/60"
+            >
+              <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+                <div>
+                  <h3 className="text-xl font-semibold tracking-tight">
+                    {job.role}
+                  </h3>
+                  <p className="font-medium text-accent">{job.org}</p>
+                </div>
+                <p className="text-sm text-muted sm:text-right">
+                  {job.period}
+                  <span className="block">{job.location}</span>
+                </p>
+              </div>
+              <ul className="mt-4 space-y-2 text-sm text-muted">
+                {job.points.map((pt) => (
+                  <li key={pt} className="flex gap-2">
+                    <span aria-hidden className="text-accent">
+                      —
+                    </span>
+                    {pt}
+                  </li>
+                ))}
+              </ul>
+            </article>
           ))}
         </div>
       </section>

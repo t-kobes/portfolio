@@ -13,7 +13,13 @@ export interface Project {
 
 export interface Content {
   meta: { title: string; description: string };
-  nav: { projects: string; skills: string; about: string; contact: string };
+  nav: {
+    projects: string;
+    experience: string;
+    skills: string;
+    about: string;
+    contact: string;
+  };
   hero: {
     greeting: string;
     name: string;
@@ -24,6 +30,16 @@ export interface Content {
   };
   facts: string[];
   projects: { title: string; subtitle: string; items: Project[] };
+  experience: {
+    title: string;
+    items: {
+      role: string;
+      org: string;
+      period: string;
+      location: string;
+      points: string[];
+    }[];
+  };
   skills: { title: string; groups: { label: string; items: string[] }[] };
   about: { title: string; paragraphs: string[] };
   education: {
@@ -62,6 +78,7 @@ export const content: Record<Locale, Content> = {
     },
     nav: {
       projects: "Проекты",
+      experience: "Опыт",
       skills: "Стек",
       about: "Обо мне",
       contact: "Контакты",
@@ -142,6 +159,33 @@ export const content: Record<Locale, Content> = {
         },
       ],
     },
+    experience: {
+      title: "Опыт",
+      items: [
+        {
+          role: "IT-специалист по интеграции (Integration Junior Specialist)",
+          org: "Digital College (KZ)",
+          period: "май 2026 — н. в.",
+          location: "Алматы",
+          points: [
+            "Поддержка и интеграция IT-инфраструктуры колледжа в связке с ведущим системным инженером",
+            "Развёртывание и настройка ПО, диагностика оборудования, конфигурация локальной сети",
+            "Администрирование Windows и Linux, автоматизация рутинных задач обслуживания",
+          ],
+        },
+        {
+          role: "Специалист международного отдела",
+          org: "Digital College · KazGASA",
+          period: "сентябрь 2025 — февраль 2026",
+          location: "Алматы",
+          points: [
+            "Развитие партнёрств с зарубежными университетами, подготовка меморандумов о сотрудничестве",
+            "Сопровождение программ академической мобильности и приёма иностранных студентов",
+            "Официальная переписка, перевод документов, аналитические отчёты для руководства",
+          ],
+        },
+      ],
+    },
     skills: {
       title: "Стек",
       groups: [
@@ -178,7 +222,7 @@ export const content: Record<Locale, Content> = {
       title: "Образование",
       school: "Digital College Almaty",
       degree: "Software Engineering",
-      period: "2025 — 2029",
+      period: "2024 — 2028",
       note: "2-й курс · повышенная стипендия",
     },
     contact: {
@@ -203,6 +247,7 @@ export const content: Record<Locale, Content> = {
     },
     nav: {
       projects: "Projects",
+      experience: "Experience",
       skills: "Stack",
       about: "About",
       contact: "Contact",
@@ -283,6 +328,33 @@ export const content: Record<Locale, Content> = {
         },
       ],
     },
+    experience: {
+      title: "Experience",
+      items: [
+        {
+          role: "Integration Junior Specialist",
+          org: "Digital College (KZ)",
+          period: "May 2026 — present",
+          location: "Almaty",
+          points: [
+            "Maintain and integrate the college's IT infrastructure alongside the Lead Systems Engineer",
+            "Deploy and configure software, troubleshoot hardware, set up the local network",
+            "Administer Windows and Linux, automate routine maintenance tasks",
+          ],
+        },
+        {
+          role: "International Relations Officer",
+          org: "Digital College · KazGASA",
+          period: "September 2025 — February 2026",
+          location: "Almaty",
+          points: [
+            "Developed partnerships with international universities, drafted Memorandums of Understanding",
+            "Supported academic mobility programs and international student admissions",
+            "Official correspondence, document translation, analytical reports for senior leadership",
+          ],
+        },
+      ],
+    },
     skills: {
       title: "Stack",
       groups: [
@@ -319,7 +391,7 @@ export const content: Record<Locale, Content> = {
       title: "Education",
       school: "Digital College Almaty",
       degree: "Software Engineering",
-      period: "2025 — 2029",
+      period: "2024 — 2028",
       note: "2nd year · merit scholarship",
     },
     contact: {
