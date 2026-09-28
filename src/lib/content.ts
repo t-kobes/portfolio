@@ -1,14 +1,20 @@
 export const locales = ["ru", "en"] as const;
 export type Locale = (typeof locales)[number];
 
+export interface ProjectLink {
+  href: string;
+  label: string;
+}
+
 export interface Project {
   name: string;
   tagline: string;
   description: string;
   highlights: string[];
   stack: string[];
-  link?: string;
-  linkLabel?: string;
+  status?: string;
+  /** Первая ссылка — основная: по ней открывается вся карточка. */
+  links?: ProjectLink[];
 }
 
 export interface Content {
@@ -24,9 +30,12 @@ export interface Content {
     greeting: string;
     name: string;
     role: string;
+    specialty: string[];
     tagline: string;
     cta: string;
     ctaSecondary: string;
+    available: string;
+    portraitAlt: string;
   };
   facts: string[];
   projects: { title: string; subtitle: string; items: Project[] };
@@ -65,16 +74,23 @@ export interface Content {
 }
 
 const email = "tverkgvorov@gmail.com";
-const github = "https://github.com/Beginner-Tima";
+const github = "https://github.com/t-kobes";
 const telegram = "https://t.me/singersh";
 const phone = "+7 705 965 6076";
+
+const tabysApp = "https://kaspi-seller-miniapp.vercel.app";
+const tabysBot = "https://t.me/kaspi_calc_bot";
+const tabysCode = "https://github.com/t-kobes/TabysApp-Saas";
+const careerVerseApp = "https://careerverse-web-tau.vercel.app";
+const careerVerseCode = "https://github.com/t-kobes/CareerVerse";
+const cityPulseCode = "https://github.com/t-kobes/CityPulse_Ai_Hackaton";
 
 export const content: Record<Locale, Content> = {
   ru: {
     meta: {
-      title: "Тамерлан Кобес — разработчик",
+      title: "Тамерлан Кобес — full-stack разработчик",
       description:
-        "Full-stack разработчик из Казахстана. Строю продукты для селлеров маркетплейсов и образовательные платформы: Табыс, CareerVerse, KazTeenCommunity.",
+        "Full-stack разработчик на TypeScript из Казахстана. Строю продукты для селлеров маркетплейсов и образовательные платформы: Табыс, CareerVerse, CityPulse AI, KazTeenCommunity.",
     },
     nav: {
       projects: "Проекты",
@@ -87,10 +103,13 @@ export const content: Record<Locale, Content> = {
       greeting: "Привет, я",
       name: "Тамерлан Кобес",
       role: "Full-stack разработчик",
+      specialty: ["TypeScript", "React · Next.js", "Node.js", "PostgreSQL"],
       tagline:
         "Строю продукты полного цикла — от архитектуры и базы данных до запуска и первых пользователей. Специализация: serverless-бэкенды, Telegram Mini Apps и AI-интеграции.",
       cta: "Смотреть проекты",
       ctaSecondary: "Написать мне",
+      available: "Открыт к стажировкам",
+      portraitAlt: "Тамерлан Кобес, full-stack разработчик",
     },
     facts: [
       "Табыс — собственный B2B-продукт, запущен и работает",
@@ -101,11 +120,12 @@ export const content: Record<Locale, Content> = {
     projects: {
       title: "Проекты",
       subtitle:
-        "Не учебные задачи — работающие системы с пользователями, данными и деплоем в продакшен.",
+        "Не учебные задачи — работающие системы с пользователями, данными и деплоем в продакшен. Нажмите на карточку, чтобы открыть проект.",
       items: [
         {
           name: "Табыс",
           tagline: "B2B-платформа для продавцов Kaspi и Wildberries",
+          status: "Работает в проде",
           description:
             "Telegram Mini App и бот, которые помогают селлерам находить прибыльные ниши, отслеживать цены конкурентов, считать маржу и генерировать SEO-карточки на русском и казахском. Запущен: радары ниш и цен, юнит-экономика, кабинет продавца.",
           highlights: [
@@ -123,10 +143,16 @@ export const content: Record<Locale, Content> = {
             "React 19",
             "Gemini API",
           ],
+          links: [
+            { href: tabysApp, label: "Открыть приложение" },
+            { href: tabysBot, label: "Бот в Telegram" },
+            { href: tabysCode, label: "Код на GitHub" },
+          ],
         },
         {
           name: "CareerVerse",
           tagline: "Геймифицированная платформа развития карьеры",
+          status: "Живое демо",
           description:
             "Пользователь прокачивает профессию как персонажа в игре: уровни, XP, монеты, адаптивные тесты. Полный цикл — от схемы данных до продакшена на Vercel.",
           highlights: [
@@ -135,12 +161,29 @@ export const content: Record<Locale, Content> = {
             "Авторизация через Supabase JWT, стриминг результатов по SSE",
           ],
           stack: ["NestJS", "Prisma", "PostgreSQL", "Supabase", "Next.js", "Vercel"],
-          link: "https://github.com/Beginner-Tima/CareerVerse",
-          linkLabel: "Код на GitHub",
+          links: [
+            { href: careerVerseApp, label: "Открыть демо" },
+            { href: careerVerseCode, label: "Код на GitHub" },
+          ],
+        },
+        {
+          name: "CityPulse AI",
+          tagline: "Дашборд умного города с ИИ-детекцией аномалий",
+          status: "Хакатон",
+          description:
+            "Мониторинг Алматы в реальном времени: качество воздуха, скорость трафика и состояние системы по районам. ИИ находит аномалии, объясняет их и отвечает на вопросы о метриках города в чате.",
+          highlights: [
+            "Движок детекции аномалий по порогам PM2.5 и скорости трафика → алерты в AI-диспетчер",
+            "ИИ-инсайты и чат-ассистент по метрикам города через Gemini API",
+            "Мониторинг по районам Алматы и обновление данных каждые 15 секунд",
+          ],
+          stack: ["React 19", "TypeScript", "Recharts", "Gemini API", "Node.js"],
+          links: [{ href: cityPulseCode, label: "Код на GitHub" }],
         },
         {
           name: "KazTeenCommunity",
           tagline: "Платформа профориентации для подростков Казахстана · CTO",
+          status: "CTO",
           description:
             "Подбор университетов и хобби, дневник поступления, база вузов и грантов, ИИ-анализ профиля. Отвечаю за техническую часть платформы как CTO.",
           highlights: [
@@ -241,9 +284,9 @@ export const content: Record<Locale, Content> = {
   },
   en: {
     meta: {
-      title: "Tamerlan Kobes — Developer",
+      title: "Tamerlan Kobes — full-stack developer",
       description:
-        "Full-stack developer from Kazakhstan. Building products for marketplace sellers and education platforms: Tabys, CareerVerse, KazTeenCommunity.",
+        "TypeScript full-stack developer from Kazakhstan. Building products for marketplace sellers and education platforms: Tabys, CareerVerse, CityPulse AI, KazTeenCommunity.",
     },
     nav: {
       projects: "Projects",
@@ -256,10 +299,13 @@ export const content: Record<Locale, Content> = {
       greeting: "Hi, I'm",
       name: "Tamerlan Kobes",
       role: "Full-stack developer",
+      specialty: ["TypeScript", "React · Next.js", "Node.js", "PostgreSQL"],
       tagline:
         "I build products end to end — from architecture and database to launch and first users. Focus areas: serverless backends, Telegram Mini Apps and AI integrations.",
       cta: "View projects",
       ctaSecondary: "Get in touch",
+      available: "Open to internships",
+      portraitAlt: "Tamerlan Kobes, full-stack developer",
     },
     facts: [
       "Tabys — my own B2B product, launched and running",
@@ -270,11 +316,12 @@ export const content: Record<Locale, Content> = {
     projects: {
       title: "Projects",
       subtitle:
-        "Not coursework — working systems with users, data and production deployments.",
+        "Not coursework — working systems with users, data and production deployments. Click a card to open the project.",
       items: [
         {
           name: "Tabys",
           tagline: "B2B platform for Kaspi and Wildberries sellers",
+          status: "Live in production",
           description:
             "A Telegram Mini App and bot that help marketplace sellers find profitable niches, track competitor prices, calculate margins and generate SEO listings in Russian and Kazakh. Live: niche and price radars, unit economics, seller dashboard.",
           highlights: [
@@ -292,10 +339,16 @@ export const content: Record<Locale, Content> = {
             "React 19",
             "Gemini API",
           ],
+          links: [
+            { href: tabysApp, label: "Open the app" },
+            { href: tabysBot, label: "Telegram bot" },
+            { href: tabysCode, label: "Code on GitHub" },
+          ],
         },
         {
           name: "CareerVerse",
           tagline: "Gamified career development platform",
+          status: "Live demo",
           description:
             "Users level up a profession like a game character: levels, XP, coins, adaptive tests. Full cycle — from data schema to production on Vercel.",
           highlights: [
@@ -304,12 +357,29 @@ export const content: Record<Locale, Content> = {
             "Supabase JWT auth, result streaming over SSE",
           ],
           stack: ["NestJS", "Prisma", "PostgreSQL", "Supabase", "Next.js", "Vercel"],
-          link: "https://github.com/Beginner-Tima/CareerVerse",
-          linkLabel: "Code on GitHub",
+          links: [
+            { href: careerVerseApp, label: "Open the demo" },
+            { href: careerVerseCode, label: "Code on GitHub" },
+          ],
+        },
+        {
+          name: "CityPulse AI",
+          tagline: "Smart city dashboard with AI anomaly detection",
+          status: "Hackathon",
+          description:
+            "Real-time monitoring of Almaty: air quality, traffic speed and system health by district. AI detects anomalies, explains them and answers questions about city metrics in a chat.",
+          highlights: [
+            "Anomaly detection engine on PM2.5 and traffic-speed thresholds → alerts to an AI dispatcher",
+            "AI insights and a chat assistant over city metrics via the Gemini API",
+            "District-level monitoring across Almaty with data refreshed every 15 seconds",
+          ],
+          stack: ["React 19", "TypeScript", "Recharts", "Gemini API", "Node.js"],
+          links: [{ href: cityPulseCode, label: "Code on GitHub" }],
         },
         {
           name: "KazTeenCommunity",
           tagline: "Career guidance platform for teenagers in Kazakhstan · CTO",
+          status: "CTO",
           description:
             "University and hobby matching, an admission diary, a database of universities and grants, AI profile analysis. I own the technical side of the platform as CTO.",
           highlights: [
