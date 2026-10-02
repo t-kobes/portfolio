@@ -103,9 +103,9 @@ export const content: Record<Locale, Content> = {
       greeting: "Привет, я",
       name: "Тамерлан Кобес",
       role: "Full-stack разработчик",
-      specialty: ["TypeScript", "React · Next.js", "Node.js", "PostgreSQL"],
+      specialty: ["TypeScript", "Node.js · NestJS", "PostgreSQL", "React · Next.js"],
       tagline:
-        "Строю продукты полного цикла — от архитектуры и базы данных до запуска и первых пользователей. Специализация: serverless-бэкенды, Telegram Mini Apps и AI-интеграции.",
+        "Сильная сторона — бэкенд на TypeScript и Node.js: архитектура API, схемы баз данных, авторизация и интеграции внешних сервисов. Делаю продукты полного цикла: serverless-бэкенды, Telegram Mini Apps и AI-интеграции.",
       cta: "Смотреть проекты",
       ctaSecondary: "Написать мне",
       available: "Открыт к стажировкам",
@@ -299,9 +299,9 @@ export const content: Record<Locale, Content> = {
       greeting: "Hi, I'm",
       name: "Tamerlan Kobes",
       role: "Full-stack developer",
-      specialty: ["TypeScript", "React · Next.js", "Node.js", "PostgreSQL"],
+      specialty: ["TypeScript", "Node.js · NestJS", "PostgreSQL", "React · Next.js"],
       tagline:
-        "I build products end to end — from architecture and database to launch and first users. Focus areas: serverless backends, Telegram Mini Apps and AI integrations.",
+        "My strength is the backend — TypeScript and Node.js: API architecture, database schemas, auth and third-party integrations. I build products end to end: serverless backends, Telegram Mini Apps and AI integrations.",
       cta: "View projects",
       ctaSecondary: "Get in touch",
       available: "Open to internships",

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import avatar from "@/assets/avatar.jpg";
 import portrait from "@/assets/portrait.jpg";
 import { content, locales, type Locale, type Project } from "@/lib/content";
 
@@ -19,11 +20,11 @@ export default async function Home({
       <header className="sticky top-0 z-20 -mx-6 flex items-center justify-between border-b border-border/60 bg-background/80 px-6 py-3 backdrop-blur-xl">
         <span className="flex items-center gap-2.5">
           <Image
-            src={portrait}
+            src={avatar}
             alt=""
             width={36}
             height={36}
-            className="h-9 w-9 rounded-full object-cover object-[50%_18%]"
+            className="h-9 w-9 rounded-full object-cover ring-1 ring-border/60"
           />
           <span className="hidden text-sm font-semibold tracking-tight sm:block">
             {c.hero.name}
